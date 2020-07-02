@@ -1,0 +1,5 @@
+FROM ubuntu:latest
+
+RUN useradd -m -u
+
+CMD ["/bin/bash"]

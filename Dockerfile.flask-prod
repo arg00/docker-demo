@@ -1,0 +1,19 @@
+
+FROM ubuntu:latest
+
+RUN apt-get update -y && apt-get install -y python3 python3-pip libpcre3-dev
+
+COPY app /app/
+WORKDIR /app
+RUN pip3 install -r requirements.txt
+RUN useradd -m mochie
+
+EXPOSE 5555
+EXPOSE 9191
+
+USER mochie
+
+ENV FLASK_APP=hello.py
+ENV FLASK_ENV=development
+CMD ["uwsgi", "--http", ":5555", "--module", "hello:app", "--master", "--process", "4", "--threads", "2", "--stats", "0.0.0.0:9191"]
+#CMD ["flask", "run", "--host", "0.0.0.0"]
