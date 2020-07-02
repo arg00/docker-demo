@@ -1,0 +1,7 @@
+import os
+
+def main():
+    print("hello" + os.getenv("NAME")+" (running as "+str(os.getuid())+")")
+
+if __name__ == "__main__":
+    main()
